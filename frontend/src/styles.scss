@@ -1,0 +1,64 @@
+/* Importações via Angular CLI (não use @import aqui) */
+/* Esses imports são feitos no angular.json */
+
+/* Estilos customizados */
+.product-card {
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.product-img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.btn-custom {
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+}
+
+.form-control-custom {
+    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid #dee2e6;
+}
+
+.detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Adicione esta classe se estiver usando o pipe de truncate */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Responsividade adicional */
+@media (max-width: 768px) {
+    .detail-container {
+        padding: 1rem;
+    }
+
+    .product-img {
+        height: 150px;
+    }
+}

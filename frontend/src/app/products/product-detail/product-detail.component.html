@@ -1,0 +1,69 @@
+<div class="detail-container py-5" *ngIf="produto">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1 class="fw-bold">{{ produto.nome }}</h1>
+        <div>
+            <a [routerLink]="['/products', produto.slug, 'editar']"
+                class="btn btn-outline-primary btn-custom me-2">
+                <i class="bi bi-pencil me-1"></i> Editar
+            </a>
+            <button (click)="onDelete()"
+                class="btn btn-outline-danger btn-custom">
+                <i class="bi bi-trash me-1"></i> Excluir
+            </button>
+        </div>
+    </div>
+
+    <div class="row g-5">
+        <div class="col-lg-6">
+            <div class="rounded-3 overflow-hidden shadow">
+                <img [src]="'http://localhost:3000/' + produto.imagemPath"
+                    class="img-fluid w-100"
+                    style="max-height: 500px; object-fit: cover;"
+                    [alt]="produto.nome">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="bg-light p-4 rounded-3 shadow-sm">
+                <h3 class="fw-bold mb-4">Descrição</h3>
+                <p class="lead">{{ produto.descricao }}</p>
+
+                <div
+                    class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                    <h2 class="text-primary fw-bold mb-0">R$ {{ produto.preco |
+                        number:'1.2-2' }}</h2>
+                    <span class="badge bg-success py-2 px-3">Em estoque</span>
+                </div>
+
+                <div class="mt-4 pt-3">
+                    <button class="btn btn-primary btn-custom w-100 py-3">
+                        <i class="bi bi-cart3 me-2"></i> Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="container mt-4" *ngIf="produto">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>{{ produto.nome }}</h2>
+        <div>
+            <a [routerLink]="['/products', produto.slug, 'editar']"
+                class="btn btn-secondary me-2">Editar</a>
+            <button (click)="onDelete()" class="btn btn-danger">Excluir</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <img [src]="'http://localhost:3000/' + produto.imagemPath"
+                class="img-fluid rounded"
+                [alt]="produto.nome">
+        </div>
+        <div class="col-md-6">
+            <p class="lead">{{ produto.descricao }}</p>
+            <h3 class="text-primary">R$ {{ produto.preco | number:'1.2-2'
+                }}</h3>
+            <p class="text-muted">URL atual: {{ currentUrl }}</p>
+        </div>
+    </div>
+</div> -->
