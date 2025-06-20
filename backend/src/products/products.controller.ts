@@ -125,53 +125,6 @@ export class ProductsController {
 
         return this.productsService.update(productId, updateProductDto, imagePath);
     }
-    /*  @Put(':id')
-     @ApiConsumes('multipart/form-data')
-     @ApiBody({
-         schema: {
-             type: 'object',
-             properties: {
-                 nome: { type: 'string' },
-                 descricao: { type: 'string' },
-                 preco: { type: 'number' },
-                 imagem: {
-                     type: 'string',
-                     format: 'binary',
-                 },
-             },
-         },
-     })
-     @UseInterceptors(FileInterceptor('imagem'))
-     async update(
-         @Param('id') id: string,
-         @Body() updateProductDto: CreateProductDto,
-         @UploadedFile() file?: Express.Multer.File,
-     ) {
-         const productId = parseInt(id, 10);
-         if (isNaN(productId)) {
-             throw new BadRequestException('Invalid product ID');
-         }
- 
-         // Adicione logs para depuração
-         console.log('Dados recebidos:', {
-             id: productId,
-             body: updateProductDto,
-             hasFile: !!file
-         });
- 
-         try {
-             const imagePath = file ? file.path : undefined;
- 
-             if (typeof updateProductDto.preco === 'string') {
-                 updateProductDto.preco = Number(updateProductDto.preco);
-             }
- 
-             return await this.productsService.update(productId, updateProductDto, imagePath);
-         } catch (error) {
-             console.error('Erro ao atualizar produto:', error);
-             throw error; // NestJS vai converter para a resposta HTTP apropriada
-         }
-     } */
 
     @Delete(':id')
     @ApiOperation({ summary: 'Delete o produto pelo ID' })

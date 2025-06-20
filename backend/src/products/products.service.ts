@@ -85,44 +85,7 @@ export class ProductsService {
 
         return this.productsRepository.save(product);
     }
-    /* async update(id: number, updateProductDto: CreateProductDto, imagemPath?: string): Promise<Product> {
-        // Primeiro verifica se o produto existe
-        const product = await this.productsRepository.findOne({
-            where: { id }
-        });
-
-        if (!product) {
-            throw new NotFoundException(`Product with ID ${id} not found`);
-        }
-
-        // Gera o novo slug baseado no novo nome
-        const newSlug = slugify(updateProductDto.nome, { lower: true });
-
-        // Verifica se o novo slug já existe para outro produto
-        if (newSlug !== product.slug) {
-            const existingProduct = await this.productsRepository.findOne({
-                where: { slug: newSlug }
-            });
-
-            if (existingProduct && existingProduct.id !== id) {
-                throw new BadRequestException(`Slug '${newSlug}' is already in use by another product`);
-            }
-        }
-
-        // Atualiza os campos
-        product.nome = updateProductDto.nome;
-        product.descricao = updateProductDto.descricao;
-        product.preco = updateProductDto.preco;
-        product.slug = newSlug;
-
-        // Atualiza a imagem apenas se uma nova foi fornecida
-        if (imagemPath) {
-            product.imagemPath = imagemPath;
-        }
-
-        return this.productsRepository.save(product);
-    } */
-
+    
     async remove(id: number): Promise<void> {
         const product = await this.productsRepository.findOne({ where: { id } });
         if (!product) {
