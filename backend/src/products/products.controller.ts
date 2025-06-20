@@ -13,6 +13,7 @@ export class ProductsController {
     constructor(private readonly productsService: ProductsService) { }
 
     @Post()
+    @ApiResponse({ status: 200, description: 'Cadastro de Produtos' })
     @UsePipes(new ValidationPipe({ transform: true })) // Adicione esta linha
     @ApiConsumes('multipart/form-data')
     @ApiBody({
@@ -48,7 +49,7 @@ export class ProductsController {
         @UploadedFile() file: Express.Multer.File,
     ) {
         if (!file) {
-            throw new BadRequestException('Image is required');
+            throw new BadRequestException('Imagem é necessária');
         }
         // Converter preço para número se necessário
         if (typeof createProductDto.preco === 'string') {
@@ -59,21 +60,22 @@ export class ProductsController {
     }
 
     @Get()
-    @ApiResponse({ status: 200, description: 'List of all products' })
+    @ApiResponse({ status: 200, description: 'Lista de Produtos' })
     findAll() {
         // return ['Produto 1', 'Produto 2'];
         return this.productsService.findAll();
     }
 
     @Get(':slug')
-    @ApiResponse({ status: 200, description: 'Product details' })
-    @ApiResponse({ status: 404, description: 'Product not found' })
+    @ApiResponse({ status: 200, description: 'Detalhes do Produto' })
+    @ApiResponse({ status: 404, description: 'Produto não encontrado' })
     findOne(@Param('slug') slug: string) {
         return this.productsService.findOneBySlug(slug);
     }
 
 
     @Put(':id')
+    @ApiResponse({ status: 200, description: 'Atualiza cadastro de Produtos' })
     @ApiConsumes('multipart/form-data')
     @ApiBody({
         schema: {
@@ -110,7 +112,7 @@ export class ProductsController {
     ) {
         const productId = parseInt(id, 10);
         if (isNaN(productId)) {
-            throw new BadRequestException('Invalid product ID');
+            throw new BadRequestException('ID inválido para o produto');
         }
 
         // Converter preço para número se necessário
@@ -172,26 +174,26 @@ export class ProductsController {
      } */
 
     @Delete(':id')
-    @ApiOperation({ summary: 'Delete a product by ID' })
-    @ApiParam({ name: 'id', type: Number, description: 'Product ID' })
-    @ApiResponse({ status: 200, description: 'Product deleted successfully' })
-    @ApiResponse({ status: 400, description: 'Invalid ID or product is referenced elsewhere' })
-    @ApiResponse({ status: 404, description: 'Product not found' })
+    @ApiOperation({ summary: 'Delete o produto pelo ID' })
+    @ApiParam({ name: 'id', type: Number, description: 'Produto ID' })
+    @ApiResponse({ status: 200, description: 'Produto deletado com sucesso' })
+    @ApiResponse({ status: 400, description: 'ID inválido ou produto referenciado em outro lugar' })
+    @ApiResponse({ status: 404, description: 'Pooduto não encontrado' })
     async remove(@Param('id') id: string) {
         const productId = parseInt(id, 10);
         if (isNaN(productId)) {
-            throw new BadRequestException('Invalid product ID');
+            throw new BadRequestException('Id do produto inválido');
         }
 
         try {
             await this.productsService.remove(productId);
-            return { message: 'Product deleted successfully' };
+            return { message: 'Produto deletado com sucesso' };
         } catch (error) {
             if (error instanceof NotFoundException) {
                 throw error;
             }
-            console.error('Error deleting product:', error);
-            throw new BadRequestException(error.message || 'Error deleting product');
+            console.error('Erro ao deletar produto:', error);
+            throw new BadRequestException(error.message || 'Erro ao deletar produto');
         }
     }
 }
