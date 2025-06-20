@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { ProductService } from '../product.service';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,7 +16,9 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private produtoService: ProductService,
-    private router: Router
+    private router: Router,
+    private titleService: Title,
+    private metaService: Meta,
   ) { }
 
   ngOnInit(): void {
@@ -23,6 +26,13 @@ export class ProductDetailComponent implements OnInit {
     if (slug) {
       this.produtoService.getProduto(slug).subscribe(produto => {
         this.produto = produto;
+        // SEO DINÂMICO
+      this.titleService.setTitle(this.produto.nome);
+      this.metaService.updateTag({ name: 'description', content: this.produto.descricao });
+      this.metaService.updateTag({ name: 'og:title', content: this.produto.nome });
+      this.metaService.updateTag({ name: 'og:description', content: this.produto.descricao });
+      this.metaService.updateTag({ name: 'og:image', content: this.produto.imagemPath });
+      this.metaService.updateTag({ name: 'og:url', content: this.currentUrl });
       });
     }
     this.currentUrl = this.produtoService.getCurrentUrl();
