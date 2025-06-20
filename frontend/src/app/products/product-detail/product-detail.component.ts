@@ -27,12 +27,12 @@ export class ProductDetailComponent implements OnInit {
       this.produtoService.getProduto(slug).subscribe(produto => {
         this.produto = produto;
         // SEO DINÂMICO
-      this.titleService.setTitle(this.produto.nome);
-      this.metaService.updateTag({ name: 'description', content: this.produto.descricao });
-      this.metaService.updateTag({ name: 'og:title', content: this.produto.nome });
-      this.metaService.updateTag({ name: 'og:description', content: this.produto.descricao });
-      this.metaService.updateTag({ name: 'og:image', content: this.produto.imagemPath });
-      this.metaService.updateTag({ name: 'og:url', content: this.currentUrl });
+        this.titleService.setTitle(this.produto.nome);
+        this.metaService.updateTag({ name: 'description', content: this.produto.descricao });
+        this.metaService.updateTag({ name: 'og:title', content: this.produto.nome });
+        this.metaService.updateTag({ name: 'og:description', content: this.produto.descricao });
+        this.metaService.updateTag({ name: 'og:image', content: this.produto.imagemPath });
+        this.metaService.updateTag({ name: 'og:url', content: this.currentUrl });
       });
     }
     this.currentUrl = this.produtoService.getCurrentUrl();
